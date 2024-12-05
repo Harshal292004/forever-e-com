@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme Variables */
+    --color-primary: #2D3748;
+    --color-secondary: #718096;
+    --color-accent: #3182CE;
+    --color-background: #F7FAFC;
+    --color-text: #1A202C;
+    --button-text-color: #F7FAFC;
+    --button-background-color: #3182CE;
+  }
+
+  .dark {
+    /* Dark Theme Variables */
+    --color-primary: #E2E8F0;
+    --color-secondary: #A0AEC0;
+    --color-accent: #63B3ED;
+    --color-background: #1A202C;
+    --color-text: #F7FAFC;
+    --button-text-color: #1A202C;
+    --button-background-color: #63B3ED;
+  }
+}
+
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
