@@ -6,4 +6,5 @@ export default interface CartItem {
     quantity: number;              // Quantity of the product in the cart
     totalPrice: number;            // Derived field: price * quantity
     size:string;
+    sellerId:string 
 }
