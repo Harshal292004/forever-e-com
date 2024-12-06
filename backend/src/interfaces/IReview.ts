@@ -4,5 +4,6 @@ export default interface IReview {
     userId: mongoose.Types.ObjectId; 
     rating: number;                 
     comment: string;                
-    date: number;                     
+    createdAt?: Date;
+    updatedAt?: Date;                
 }

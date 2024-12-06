@@ -13,6 +13,6 @@ export default interface IUser {
     cart?: ICartItem[];              
     orderHistory?: IOrder[];         
     paymentMethods?: IPaymentMethod[]; 
-    createdAt: Date;                // Date when the user account was created
+    createdAt?: Date;                // Date when the user account was created
     updatedAt?: Date;               // Last updated timestamp (optional)
 }

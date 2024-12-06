@@ -33,3 +33,5 @@ const addressModelSchema:Schema<IAddress>=new Schema(
     }
 )
 const Address=mongoose.model<IAddress>("Address",addressModelSchema)
+
+export default Address

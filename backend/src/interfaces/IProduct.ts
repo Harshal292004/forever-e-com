@@ -6,8 +6,9 @@ export default interface IProduct {
     category: string;                 // Primary category
     subCategory: string;              // Sub-category
     sizes: string[];                  // Available sizes
-    date: Date;                     // Listing date (timestamp)
     bestseller: boolean;              // Bestseller flag
     sellerId: string;                 // New: Seller's ID
     stock: number;                    // New: Available stock quantity
+    createdAt?: Date;
+    updatedAt?: Date;
 }

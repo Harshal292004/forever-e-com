@@ -29,10 +29,12 @@ const orderModelSchema:Schema<IOrder>=new Schema(
             type:String
         },
         shippingAddress:{
-            type:mongoose.Schema.Types.ObjectId
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Address'
         },
         paymentMethod:{
-            type:String
+            type:String,
+            default:"COD"
         },
         trackingId:{
             type:String
@@ -46,3 +48,5 @@ const orderModelSchema:Schema<IOrder>=new Schema(
 
 
 const Order= mongoose.model<IOrder>('Order',orderModelSchema)
+
+export default Order

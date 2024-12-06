@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, {  Schema } from 'mongoose';
 import IReview from '../interfaces/IReview';
 
 
@@ -22,10 +22,9 @@ const reviewSchema: Schema<IReview> = new Schema(
     },
     comment:{
         type:String
-    },
-    date:{
-        type:Number
     }
+  },{
+    timestamps:true 
   }
 );
 

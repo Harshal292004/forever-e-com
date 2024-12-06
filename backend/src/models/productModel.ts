@@ -22,10 +22,6 @@ const productSchema:Schema<IProduct>=new Schema(
                 type:String
             }
         ],
-        date:{
-            type:Date ,
-            default:Date.now
-        },
         bestseller:{
             type:Boolean,
             default:false
@@ -36,7 +32,7 @@ const productSchema:Schema<IProduct>=new Schema(
         stock:{
             type:Number
         }
-    }
+    },{timestamps:true}
 )
 
 

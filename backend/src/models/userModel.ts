@@ -47,15 +47,7 @@ const userSchema: Schema<IUser> = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'PaymentMethod', // Reference to PaymentMethod model
       },
-    ],
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
+    ]
   },
   { timestamps: true }
 );
