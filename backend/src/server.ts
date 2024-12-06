@@ -1,8 +1,13 @@
 import "dotenv/config"
 import mongoose from "mongoose"
 import express from "express"
+import path from "path"
+
+
 
 const app= express()
+const router=express.Router()
+
 app.get("/",(req,res)=>{
     res.send("Hello WOrld!")
 })

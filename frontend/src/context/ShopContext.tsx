@@ -57,6 +57,34 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = ({ children }) =
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+
+  const loadProducts=()=>{
+
+  }
+
+  const loadUser=(
+    
+  )=>{
+
+  }
+
+  const loadOrders=()=>{
+
+  }
+
+  const loadFilteredProducts=()=>{
+    
+  }
+
+
+  const loadSearchQueryProduct=()=>{
+
+  }
+
+
+
+
+
   const value = {
     user,
     products,
