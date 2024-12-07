@@ -1,6 +1,7 @@
 import express, { NextFunction } from 'express';
 import IUser from '../../interfaces/IUser';
 import IAddress from '../../interfaces/IAddress';
+import mongoose from 'mongoose';
 const router = express.Router();
 import { Response,Request } from 'express';
 import Address from '../../models/addressModel';
@@ -8,7 +9,10 @@ import User from '../../models/userModel';
 import isUserLoggedIn from '../middleware/isUserLoggedIn';
 import verifyUserOwnership from '../middleware/verifyOwnerShip';
 import ICartItem from '../../interfaces/ICartItem';
-
+import Order from '../../models/orderModel'
+import IOrder from '../../interfaces/IOrder';
+import Product from '../../models/productModel';
+import IProduct from '../../interfaces/IProduct';
 router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
     try {
       const address = await Address.create(req.body);
@@ -35,36 +39,115 @@ router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (r
 
 
 // Add item to user's cart
-router.post('/user/:id/add-cart-item',isUserLoggedIn,verifyUserOwnership, (req:Request, res) => {
+router.post('/user/:id/:productId/add-cart-item',isUserLoggedIn,verifyUserOwnership, async (req:Request, res) => {
   try{
-
+    const product_id=new  mongoose.Types.ObjectId(req.params.productId)
+    const user=req.user
+    user.cart?.push(product_id)
+    await user.save()
+    res.status(200).json(
+      {
+        success:true,
+        message:"Product added to the cart"
+      }
+    )
+    return;
   }catch(error){
-
+    res.status(409).json(
+      {
+        success:false,
+        message:"Something went wrong"
+      }
+    )
+    return;
   }
 });
 
 // Add item to wishlist
-router.post('/user/:id/add-wish-list', (req, res) => {
-  // Add wishlist item logic here
-  res.send('Item added to wishlist');
+router.post('/user/:id/:productId/add-wish-list',isUserLoggedIn,verifyUserOwnership ,async (req, res) => {
+  try{
+    const product_id= new mongoose.Types.ObjectId(req.params.productId)
+    const user= req.user
+    user.wishlist?.push(product_id)
+    await user.save()
+    res.status(200).json(
+      {
+        success:true,
+        message:"Product is added to wish list"
+      }
+    )
+    return;
+  }catch(error){
+    res.status(409).json(
+      {
+        success:false,
+        message:"Something went wrong"
+      }
+    )
+    return;
+  }
 });
 
 // Place order
-router.post('/user/:id/place-order', (req, res) => {
-  // Place order logic here
-  res.send('Order placed');
+router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnership ,async(req, res) => {
+  try{
+    const product_id= new mongoose.Types.ObjectId(req.params.productId)
+    const user= req.user
+    const load_product= Product.findById(product_id)
+    if(!load_product){
+      res.status(409).json(
+        {
+          success:false,
+          message:"Product not found"
+        }
+      )
+      return;
+    }
+    if(load_product.stock<quantity){
+        const message= `` 
+        if(load_product.stock <=0){
+          message.concat(`Sorry for the inconvineince No stock left`)
+        }  
+        else {
+          message.concat(`Sorry for the inconvinience  but only ${load_product.stock} items left`s)
+        }
+
+        res.status(409).json(
+        {
+          success:false,
+          message:message
+        }
+        return;
+      )
+    }
+
+    const order= Order.create(
+      {
+        
+      }
+    )
+    user.orderHistory?.push()
+  }catch(error){
+    
+  }
 });
 
 // Review product
 router.post('/user/:id/review-product', (req, res) => {
-  // Review product logic here
-  res.send('Product reviewed');
+  try{
+
+  }catch(error){
+    
+  }
 });
 
 // Update user account
 router.post('/user/:id/update-account', (req, res) => {
-  // Update account logic here
-  res.send('Account updated');
+  try{
+
+  }catch(error){
+    
+  }
 });
 
 export default router;

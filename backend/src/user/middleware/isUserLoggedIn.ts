@@ -2,14 +2,15 @@ import jwt from 'jsonwebtoken'
 import User from '../../models/userModel'
 import { Request, Response, NextFunction } from 'express'
 
-const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):Promise<any> => {
+const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
     const token = req.cookies.user_access_token
 
     if (!token) {
-        return res.status(401).json({
+        res.status(401).json({
             success: false,
             message: "Unauthorized: No token provided"
         })
+        return;
     }
 
     try {
@@ -20,10 +21,11 @@ const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):P
         const user = await User.findOne({ email: decoded.email }).select('-password')
         
         if (!user) {
-            return res.status(404).json({
+            res.status(404).json({
                 success: false,
                 message: "User not found"
             })
+            return;
         }
 
         // Attach user to request object for use in subsequent middleware/routes
@@ -32,16 +34,18 @@ const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):P
 
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {
-            return res.status(401).json({
+            res.status(401).json({
                 success: false,
                 message: "Invalid token"
             })
+            return;
         }
 
-        return res.status(500).json({
+        res.status(500).json({
             success: false,
             message: "Internal server error"
         })
+        return;
     }
 }
 
