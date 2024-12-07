@@ -1,55 +1,46 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 import IUser from '../interfaces/IUser';
-const userSchema: Schema<IUser> = new Schema(
-  {
-    name: {
-      type: String,
-      required: true,
+
+const userSchema = new Schema<IUser>(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        phoneNumber: {
+            type: String,
+        },
+        address: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Address',
+        }],
+        wishlist: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
+        }],
+        cart: [{
+            type: Schema.Types.ObjectId,
+            ref: 'CartItem',
+        }],
+        orderHistory: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Order',
+        }],
+        paymentMethods: [{
+            type: Schema.Types.ObjectId,
+            ref: 'PaymentMethod',
+        }]
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-      type: String, // Phone number as string to allow leading zeros
-    },
-    address: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Address', // Reference to Address model
-      },
-    ],
-    wishlist: [
-      {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Product'
-      },
-    ],
-    cart: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CartItem', // Reference to CartItem model
-      },
-    ],
-    orderHistory: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order', // Reference to Order model
-      },
-    ],
-    paymentMethods: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'PaymentMethod', // Reference to PaymentMethod model
-      },
-    ]
-  },
-  { timestamps: true }
+    { timestamps: true }
 );
 
 // Create the Mongoose model for User with the IUser interface

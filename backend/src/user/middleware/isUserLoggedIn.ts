@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken'
 import User from '../../models/userModel'
 import { Request, Response, NextFunction } from 'express'
-import IAuthRequest from '../../interfaces/IAuthRequest'
 
-const isUserLoggedIn = async (req: IAuthRequest, res: Response, next: NextFunction) => {
+const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):Promise<any> => {
     const token = req.cookies.user_access_token
 
     if (!token) {

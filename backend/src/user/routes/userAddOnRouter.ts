@@ -5,12 +5,15 @@ const router = express.Router();
 import { Response,Request } from 'express';
 import Address from '../../models/addressModel';
 import User from '../../models/userModel';
+import isUserLoggedIn from '../middleware/isUserLoggedIn';
+import verifyUserOwnership from '../middleware/verifyOwnerShip';
+import ICartItem from '../../interfaces/ICartItem';
 
-router.post('/user/:id/add-address', async (req: Request<IAddress>, res: Response):Promise<any> => {
+router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
     try {
       const address = await Address.create(req.body);
-      const user = await User.findByIdAndUpdate(
-        req.params.id,
+      const user = await User.updateOne(
+        {_id:req.params.id},
         { $push: { address: address._id } },
         { new: true }
       );
@@ -32,9 +35,12 @@ router.post('/user/:id/add-address', async (req: Request<IAddress>, res: Respons
 
 
 // Add item to user's cart
-router.post('/user/:id/add-cart-item', (req, res) => {
-  // Add cart item logic here
-  res.send('Cart item added');
+router.post('/user/:id/add-cart-item',isUserLoggedIn,verifyUserOwnership, (req:Request, res) => {
+  try{
+
+  }catch(error){
+
+  }
 });
 
 // Add item to wishlist

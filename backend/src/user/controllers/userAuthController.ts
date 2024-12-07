@@ -1,12 +1,11 @@
 // auth controller
-import express, { Request, Response, NextFunction } from "express";
+import  { Request, Response, NextFunction } from "express";
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
 import User from "../../models/userModel";
 import generateToken from "../utils/generateToken";
 import Actor from "../../interfaces/IActor";
-import jwt from 'jsonwebtoken'
-
+import IAuthRequest from "../../interfaces/IAuthRequest";
 const signUpUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { name, email, password } = req.body;
@@ -27,7 +26,7 @@ const signUpUser = async (req: Request, res: Response, next: NextFunction) => {
             email,
             password: encrypted
         });
-
+       
         const actor: Actor = {
             _id: newUser._id.toString(),
             email,
@@ -98,7 +97,7 @@ const logInUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-const logOut= async (req:Request,res:Response,next:NextFunction)=>{
+const logOut= async (req:Request,res:Response)=>{
     try{
         res.clearCookie('user_access_token',{
             httpOnly:true,
@@ -119,55 +118,40 @@ const logOut= async (req:Request,res:Response,next:NextFunction)=>{
         });
     }
 }
+const deleteAccount = async (req: IAuthRequest, res: Response) => {
+    try {
+        // We already have the user from middleware
+        const user = req.user;
+        const { password } = req.body;
 
-const deleteAccount= async(req:Request,res:Response,next:NextFunction)=>{
-    try{
-        const token = req.cookies?.user_access_token
-        if(!token){
-            return res.status(401).json(
-                {
-                    success:false,
-                    message:"Authentication required"
-                }
-            )
-        }
-
-        const decoded= jwt.verify(token,process.env.JWT_KEY as string) as {_id:string }
-        const user= await User.findById(decoded._id)
-        if(!user){
-            return res.status(404).json({
-                success:false,
-                message:"User not found"
-            })
-        }
-
-        const {password}=req.body
-        const isPasswordValid= await bcrypt.compare(password,user.password)
-        if(!isPasswordValid){
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
             return res.status(401).json({
-                success:false,
-                message:"Invalid password"
-            })
+                success: false,
+                message: "Invalid password"
+            });
         }
-        await user.deleteOne()
 
-        res.clearCookie("user_access_token ",{
+        await user.deleteOne();
+
+        res.clearCookie("user_access_token", {
             httpOnly: true,
             secure: true,
             sameSite: "strict",
-        })
+        });
+
         return res.status(200).json({
             success: true,
             message: "Account deleted successfully",
         });
-    }catch(error){
+    } catch (error) {
         const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
         return res.status(500).json({
             success: false,
             message: errorMessage,
         });
     }
-}
+};
 
 
 

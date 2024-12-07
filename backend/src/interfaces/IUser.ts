@@ -1,15 +1,22 @@
-import mongoose from "mongoose";
+// IUser.ts
+import mongoose, { Document, Schema } from "mongoose";
 
-export default interface IUser {
-    name: string;                   
-    email: string;                  
-    password:string;
-    phoneNumber?: string;           
-    address?: mongoose.Schema.Types.ObjectId[];  //address need to be changing as well         
-    wishlist?: mongoose.Schema.Types.ObjectId[]; //cause we need this to be changing with the change by the product manager              
-    cart?:mongoose.Schema.Types.ObjectId[];              
-    orderHistory?:mongoose.Schema.Types.ObjectId[];         
-    paymentMethods?: mongoose.Schema.Types.ObjectId[]; 
-    createdAt?: Date;                // Date when the user account was created
-    updatedAt?: Date;               // Last updated timestamp (optional)
+// First, let's create a base interface for user properties
+interface IUserBase {
+    name: string;
+    email: string;
+    password: string;
+    phoneNumber?: string;
+    address?: mongoose.Types.ObjectId[];
+    wishlist?: mongoose.Types.ObjectId[];
+    cart?: mongoose.Types.ObjectId[];
+    orderHistory?: mongoose.Types.ObjectId[];
+    paymentMethods?: mongoose.Types.ObjectId[];
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+// Then extend it with Document to create the model interface
+export  default interface IUser extends IUserBase, Document {
+    _id: mongoose.Types.ObjectId;
 }
