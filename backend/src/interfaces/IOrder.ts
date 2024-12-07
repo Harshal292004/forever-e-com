@@ -1,5 +1,5 @@
 import IAddress  from "./IAddress";
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 export default interface IOrder extends Document {
   image: string;                    // Image URL of the product
   name: string;                     // Name of the product
@@ -17,7 +17,7 @@ export default interface IOrder extends Document {
     | 'Delivered'
     | 'Cancelled'
     | 'Returned';
-  shippingAddress: IAddress;         // Shipping address
+  shippingAddress: mongoose.Schema.Types.ObjectId         // Shipping address
   paymentMethod: 'Stripe' | 'Razorpay' | 'COD'; // Payment method
   trackingId?: string;              // Optional tracking ID
   sellerId: string;                 // New: Seller associated with the order

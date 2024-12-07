@@ -120,10 +120,16 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
         return;
       )
     }
+    const {
+      size,
+      quantity,
+      shippingAddress,
+      paymentMethod,
+    }=req.body
 
     const order= Order.create(
       {
-        
+        image:load_product.image[0]
       }
     )
     user.orderHistory?.push()
