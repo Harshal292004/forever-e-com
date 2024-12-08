@@ -38,7 +38,13 @@ const userSchema = new Schema<IUser>(
         paymentMethods: [{
             type: Schema.Types.ObjectId,
             ref: 'PaymentMethod',
-        }]
+        }],
+        review:[
+            {
+                type:Schema.Types.ObjectId,
+                ref:'Review'
+            }
+        ]
     },
     { timestamps: true }
 );

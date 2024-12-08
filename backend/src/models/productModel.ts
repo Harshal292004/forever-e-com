@@ -31,7 +31,11 @@ const productSchema:Schema<IProduct>=new Schema(
         },
         stock:{
             type:Number
-        }
+        },
+        reviews:[{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Review'
+        }]
     },{timestamps:true}
 )
 

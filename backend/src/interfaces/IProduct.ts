@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export default interface IProduct extends Document {
     name: string;                     // Product name
@@ -11,6 +11,7 @@ export default interface IProduct extends Document {
     bestseller: boolean;              // Bestseller flag
     sellerId: string;                 // New: Seller's ID
     stock: number;                    // New: Available stock quantity
+    reviews:mongoose.Types.ObjectId[]
     createdAt?: Date;
     updatedAt?: Date;
 }

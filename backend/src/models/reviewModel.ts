@@ -28,7 +28,8 @@ const reviewSchema: Schema<IReview> = new Schema(
   }
 );
 
-// Create the Mongoose model for User with the IUser interface
+
+
 const Review = mongoose.model<IReview>('Review', reviewSchema);
 
 export default Review;

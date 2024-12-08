@@ -1,6 +1,4 @@
 import express, { NextFunction } from 'express';
-import IUser from '../../interfaces/IUser';
-import IAddress from '../../interfaces/IAddress';
 import mongoose from 'mongoose';
 const router = express.Router();
 import { Response,Request } from 'express';
@@ -8,12 +6,10 @@ import Address from '../../models/addressModel';
 import User from '../../models/userModel';
 import isUserLoggedIn from '../middleware/isUserLoggedIn';
 import verifyUserOwnership from '../middleware/verifyOwnerShip';
-import ICartItem from '../../interfaces/ICartItem';
 import Order from '../../models/orderModel'
-import IOrder from '../../interfaces/IOrder';
 import Product from '../../models/productModel';
-import IProduct from '../../interfaces/IProduct';
 import Seller from '../../models/sellerModel';
+import Review from '../../models/reviewModel';
 router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
     try {
       const address = await Address.create(req.body);
@@ -158,20 +154,98 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
 });
 
 // Review product
-router.post('/user/:id/review-product',isUserLoggedIn,verifyUserOwnership,(req, res) => {
+router.post('/user/:id/:productId/review-product',isUserLoggedIn,verifyUserOwnership,async(req, res) => {
   try{
-
-  }catch(error){
+    //check whether the user have used the product then only allow him her to review the product
     
+    const productId= new mongoose.Types.ObjectId(req.params.productId)
+    const user= req.user 
+    const userId=user._id
+    if(user.orderHistory?.includes(productId)){
+      
+      const {
+        rating ,
+        comment
+      }=req.body 
+      try{
+      const product=await Product.findById(productId)
+      
+
+      const review= await Review.create(
+        {
+          productId,
+          userId,
+          rating,
+          comment
+        }
+      )
+      user.review.push(review._id)
+      product?.reviews.push(review._id)
+      res.status(200).json(
+        {
+          success:true,
+          message:"Yoo ! thanks for the review"
+        }
+      )
+    }catch(error){
+      res.status(409).json(
+        {
+          success:false,
+          message:"Product not found "
+        }
+      )
+    }
+      
+
+    }else{
+      throw new Error("You can't review this product sadly")
+    }
+  }
+  catch(error){
+    const errorMsg= error  instanceof Error?error.message:"You suck "
+    res.status(
+      409
+    ).json(
+      {
+        success:false,
+        message:errorMsg
+      }
+    )
   }
 });
 
 // Update user account
-router.post('/user/:id/update-account', (req, res) => {
+router.post('/user/:id/update-account',isUserLoggedIn,verifyUserOwnership, async(req, res) => {
   try{
+    const {
+      name,
+      phoneNumber
+    }:{name:string|null,phoneNumber:string|null}=req.body
+    const user= req.user
+    const changedName:string= name?name:user.name 
+    const changedPhoneNumber:string= phoneNumber?phoneNumber:user.phoneNumber
 
+    await user.updateOne(
+      {
+        name:changedName,
+        phoneNumber:changedPhoneNumber
+      }
+    )
+
+    res.status(200).json(
+      {
+        success:true,
+        message:"FUck you changed it "
+      }
+    )
+    return;
   }catch(error){
-    
+    res.status(409).json(
+      {
+        success:false,
+        message:"Fuck you didn't changed it "
+      }
+    )
   }
 });
 
