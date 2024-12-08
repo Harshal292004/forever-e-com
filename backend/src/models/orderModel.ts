@@ -19,9 +19,6 @@ const orderModelSchema:Schema<IOrder>=new Schema(
         size:{
             type:String
         },
-        date:{
-            type:Number
-        },
         totalPrice:{
             type:Number
         },
@@ -42,7 +39,7 @@ const orderModelSchema:Schema<IOrder>=new Schema(
         sellerId:{
             type:String 
         }
-    }
+    },{timestamps:true}
 )
 
 

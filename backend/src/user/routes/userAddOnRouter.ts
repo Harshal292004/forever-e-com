@@ -13,6 +13,7 @@ import Order from '../../models/orderModel'
 import IOrder from '../../interfaces/IOrder';
 import Product from '../../models/productModel';
 import IProduct from '../../interfaces/IProduct';
+import Seller from '../../models/sellerModel';
 router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
     try {
       const address = await Address.create(req.body);
@@ -93,7 +94,7 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
   try{
     const product_id= new mongoose.Types.ObjectId(req.params.productId)
     const user= req.user
-    const load_product= Product.findById(product_id)
+    const load_product= await  Product.findById(product_id)
     if(!load_product){
       res.status(409).json(
         {
@@ -103,23 +104,6 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
       )
       return;
     }
-    if(load_product.stock<quantity){
-        const message= `` 
-        if(load_product.stock <=0){
-          message.concat(`Sorry for the inconvineince No stock left`)
-        }  
-        else {
-          message.concat(`Sorry for the inconvinience  but only ${load_product.stock} items left`s)
-        }
-
-        res.status(409).json(
-        {
-          success:false,
-          message:message
-        }
-        return;
-      )
-    }
     const {
       size,
       quantity,
@@ -127,19 +111,54 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
       paymentMethod,
     }=req.body
 
+    if(load_product.stock < quantity){
+        const message= `` 
+        if(load_product.stock <=0){
+          message.concat(`Sorry for the inconvenience No stock left`)
+        }  
+        else {
+          message.concat(`Sorry for the inconvenience  but only ${load_product.stock} items left`)
+        }
+
+        res.status(409).json(
+        {
+          success:false,
+          message:message
+        }
+        )
+      return;
+    }
+    
     const order= Order.create(
       {
-        image:load_product.image[0]
+        image:load_product.image[0],
+        name:load_product.name ,
+        price:load_product.price,
+        quantity:quantity,
+        size:size,
+        totalPrice:quantity*load_product.price,
+        orderState:'Placed',
+        shippingAddress:shippingAddress,
+        paymentMethod:paymentMethod,
+        sellerId:load_product.sellerId  
       }
     )
-    user.orderHistory?.push()
-  }catch(error){
+    user.orderHistory?.push((await order)._id)
+    await user.save()
     
+    const seller=await  Seller.findById(product_id)
+
+    seller?.orderHistory?.push((await order)._id)
+
+    await seller?.save()
+  }catch(error){
+    console.log(`Hello you have a error : ${error}`)
+
   }
 });
 
 // Review product
-router.post('/user/:id/review-product', (req, res) => {
+router.post('/user/:id/review-product',isUserLoggedIn,verifyUserOwnership,(req, res) => {
   try{
 
   }catch(error){
