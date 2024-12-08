@@ -3,7 +3,7 @@ import User from '../../models/userModel'
 import { Request, Response, NextFunction } from 'express'
 
 const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
-    const token = req.cookies.user_access_token
+    const token = req.cookies.user_access_token || req.headers.authorization?.split(' ')[1];
 
     if (!token) {
         res.status(401).json({
