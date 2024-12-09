@@ -22,7 +22,7 @@ interface IAdminBase{
     updatedAt?: Date;
   }
 export default interface IAdmin extends Document,IAdminBase{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }
 
 

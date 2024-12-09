@@ -9,7 +9,7 @@ interface ISellerBase{
     storeName?:string
     businessType?: 'INDIVIDUAL' | 'COMPANY' | 'PARTNERSHIP';
     businessRegistrationNumber?: string;
-    store?:mongoose.Types.ObjectId
+    store?:mongoose.Schema.Types.ObjectId
     createdAt?: Date;
     updatedAt?: Date;
     notificationPreferences?: {
@@ -23,11 +23,11 @@ interface ISellerBase{
         expiry: string;      
     };
     isVerified:boolean;
-    address:mongoose.Types.ObjectId
+    address:mongoose.Schema.Types.ObjectId
     accountStatus: 'ACTIVE' | 'SUSPENDED' | 'PENDING_VERIFICATION';
 }
 
 
 export default interface ISeller extends Document , ISellerBase{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }

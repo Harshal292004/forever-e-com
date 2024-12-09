@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
 
 interface ITrackingBase  {
-    orderId:mongoose.Types.ObjectId,
+    orderId:mongoose.Schema.Types.ObjectId,
     currentLocation:{
         lat:number,
         lng:number
@@ -26,5 +26,5 @@ interface ITrackingBase  {
 }
 
 export default interface ITracking extends ITrackingBase,Document{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }

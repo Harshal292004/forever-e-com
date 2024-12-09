@@ -12,6 +12,6 @@ interface IPaymentMethodBase{
     codConfirmation?: boolean;    // Optional: Confirmation of COD (e.g., user acknowledged)
 }
 
-export interface IPaymentMethod extends IPaymentMethodBase, Document{
-    _id:mongoose.Types.ObjectId
+export default  interface IPaymentMethod extends IPaymentMethodBase, Document{
+    _id:mongoose.Schema.Types.ObjectId
 }

@@ -1,7 +1,7 @@
 import mongoose, { Document } from "mongoose";
 interface IReviewBase extends Document{
-    productId: mongoose.Types.ObjectId;  
-    userId: mongoose.Types.ObjectId; 
+    productId: mongoose.Schema.Types.ObjectId;  
+    userId: mongoose.Schema.Types.ObjectId; 
     rating: number;                 
     comment: string;               
     createdAt?: Date;
@@ -9,6 +9,6 @@ interface IReviewBase extends Document{
 }
 
 export default interface IReview extends IReviewBase{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }
 

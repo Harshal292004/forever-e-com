@@ -1,7 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import IPaymentMethod from "../../interfaces/IPaymentMethod";
-
-
+import  IPaymentMethod  from "../../interfaces/IPaymentMethod";
 const paymentMethodSchema:Schema<IPaymentMethod>= new Schema(
     {
         type:{

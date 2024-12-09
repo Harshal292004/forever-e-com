@@ -15,15 +15,15 @@ interface IOrderBase  {
     | 'Delivered'
     | 'Cancelled'
     | 'Returned';
-  shippingAddress: mongoose.Types.ObjectId;         
+  shippingAddress: mongoose.Schema.Types.ObjectId;         
   paymentMethod: 'Stripe' | 'Razorpay' | 'COD'; 
-  trackingId?: mongoose.Types.ObjectId;              
-  storeId?:mongoose.Types.ObjectId;          
+  trackingId?: mongoose.Schema.Types.ObjectId;              
+  storeId?:mongoose.Schema.Types.ObjectId;          
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 
 export default  interface IOrder extends IOrderBase,Document{
-  _id:mongoose.Types.ObjectId;
+  _id:mongoose.Schema.Types.ObjectId;
 }

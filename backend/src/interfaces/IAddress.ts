@@ -11,5 +11,5 @@ interface IAddressBase{
 }
 
 export default interface IAddress extends IAddressBase,Document{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }

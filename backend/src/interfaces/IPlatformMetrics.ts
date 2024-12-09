@@ -25,5 +25,5 @@ interface IPlatformMetricsBase {
 
 
 export default interface IPlatformMetrics extends IPlatformMetricsBase ,Document{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }

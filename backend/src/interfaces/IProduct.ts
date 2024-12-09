@@ -8,9 +8,9 @@ interface IProductBase{
     subCategory: string;              // Sub-category
     sizes: string[];                  // Available sizes
     bestseller: boolean;              
-    storeId: mongoose.Types.ObjectId;                 
+    storeId: mongoose.Schema.Types.ObjectId;                 
     stock: number;                   
-    reviews:mongoose.Types.ObjectId[]
+    reviews:mongoose.Schema.Types.ObjectId[]
     policies: {
         returnPolicy:string |  "No returns after 15 days" 
         refundPolicy:string |  "Refund processed within 7 days" 
@@ -21,5 +21,5 @@ interface IProductBase{
 }
 
 export default interface IProduct extends IProductBase, Document{
-    _id:mongoose.Types.ObjectId
+    _id:mongoose.Schema.Types.ObjectId
 }

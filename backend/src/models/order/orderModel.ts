@@ -26,7 +26,7 @@ const orderModelSchema:Schema<IOrder>=new Schema(
             enum:['Placed','Ready to Ship','Shipped','Reached Nearest Hub','Out for Delivery','Delivered','Cancelled','Returned']
         },
         shippingAddress:{
-            type:mongoose.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:'Address'
         },
         // this will depend on the product listed 
@@ -35,11 +35,11 @@ const orderModelSchema:Schema<IOrder>=new Schema(
             default:"COD"
         },
         trackingId:{
-            type:mongoose.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:"Tracking"
         },
         storeId:{
-            type:mongoose.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             ref:"Store"
         }
     },{timestamps:true}
