@@ -9,7 +9,7 @@ interface ISellerBase{
     storeName?:string
     businessType?: 'INDIVIDUAL' | 'COMPANY' | 'PARTNERSHIP';
     businessRegistrationNumber?: string;
-    store?:mongoose.Schema.Types.ObjectId
+    store?:mongoose.Schema.Types.ObjectId[]
     createdAt?: Date;
     updatedAt?: Date;
     notificationPreferences?: {

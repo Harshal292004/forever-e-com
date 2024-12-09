@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose"
 import ISeller from "../../interfaces/ISeller"
+
 const sellerModelSchema:Schema<ISeller>=new Schema(
     {
         name:{
@@ -26,10 +27,10 @@ const sellerModelSchema:Schema<ISeller>=new Schema(
         businessRegistrationNumber: {
             type:String 
         },
-        store:{
+        store:[{
             type:mongoose.Schema.Types.ObjectId,
             ref:"Store"
-        },
+        }],
         notificationPreferences:{
             type:{
                 email: Boolean,
