@@ -1,16 +1,16 @@
 import express, { NextFunction } from 'express';
 import mongoose from 'mongoose';
-const router = express.Router();
+const userServiceRouter = express.Router();
 import { Response,Request } from 'express';
-import Address from '../../models/addressModel';
-import User from '../../models/userModel';
+import Address from '../../../models/addressModel';
+import User from '../../../models/userModel';
 import isUserLoggedIn from '../middleware/isUserLoggedIn';
 import verifyUserOwnership from '../middleware/verifyOwnerShip';
-import Order from '../../models/orderModel'
-import Product from '../../models/productModel';
-import Seller from '../../models/sellerModel';
-import Review from '../../models/reviewModel';
-router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
+import Order from '../../../models/orderModel'
+import Product from '../../../models/productModel';
+import Seller from '../../../models/sellerModel';
+import Review from '../../../models/reviewModel';
+userServiceRouter.post('/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
     try {
       const address = await Address.create(req.body);
       const user = await User.updateOne(
@@ -36,7 +36,7 @@ router.post('/user/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (r
 
 
 // Add item to user's cart
-router.post('/user/:id/:productId/add-cart-item',isUserLoggedIn,verifyUserOwnership, async (req:Request, res) => {
+userServiceRouter.post('/:id/:productId/add-cart-item',isUserLoggedIn,verifyUserOwnership, async (req:Request, res) => {
   try{
     const product_id=new  mongoose.Types.ObjectId(req.params.productId)
     const user=req.user
@@ -61,7 +61,7 @@ router.post('/user/:id/:productId/add-cart-item',isUserLoggedIn,verifyUserOwners
 });
 
 // Add item to wishlist
-router.post('/user/:id/:productId/add-wish-list',isUserLoggedIn,verifyUserOwnership ,async (req, res) => {
+userServiceRouter.post('/:id/:productId/add-wish-list',isUserLoggedIn,verifyUserOwnership ,async (req, res) => {
   try{
     const product_id= new mongoose.Types.ObjectId(req.params.productId)
     const user= req.user
@@ -86,7 +86,7 @@ router.post('/user/:id/:productId/add-wish-list',isUserLoggedIn,verifyUserOwners
 });
 
 // Place order
-router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnership ,async(req, res) => {
+userServiceRouter.post('/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnership ,async(req, res) => {
   try{
     const product_id= new mongoose.Types.ObjectId(req.params.productId)
     const user= req.user
@@ -154,7 +154,7 @@ router.post('/user/:id/:productId/place-order',isUserLoggedIn,verifyUserOwnershi
 });
 
 // Review product
-router.post('/user/:id/:productId/review-product',isUserLoggedIn,verifyUserOwnership,async(req, res) => {
+userServiceRouter.post('/:id/:productId/review-product',isUserLoggedIn,verifyUserOwnership,async(req, res) => {
   try{
     //check whether the user have used the product then only allow him her to review the product
     
@@ -215,7 +215,7 @@ router.post('/user/:id/:productId/review-product',isUserLoggedIn,verifyUserOwner
 });
 
 // Update user account
-router.post('/user/:id/update-account',isUserLoggedIn,verifyUserOwnership, async(req, res) => {
+userServiceRouter.post('/:id/update-account',isUserLoggedIn,verifyUserOwnership, async(req, res) => {
   try{
     const {
       name,
@@ -249,4 +249,4 @@ router.post('/user/:id/update-account',isUserLoggedIn,verifyUserOwnership, async
   }
 });
 
-export default router;
+export default userServiceRouter;

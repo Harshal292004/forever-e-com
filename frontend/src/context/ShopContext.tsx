@@ -3,7 +3,8 @@ import Product from "../interfaces/Product";
 import Order from "../interfaces/Order";
 import User from "../interfaces/User";
 import CartItem from "../interfaces/CartItem";
-
+import useCustomReactQuery from "../Hooks/CustomReactQuery";
+import IProduct from '../../../backend/src/interfaces/IProduct'
 interface ShopContextType {
   user?: User;
   products: Product[];
@@ -44,7 +45,7 @@ interface ShopContextProviderProps {
 
 const ShopContextProvider: React.FC<ShopContextProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product>();
@@ -57,23 +58,29 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = ({ children }) =
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  const ProductList = () => {
+    const { data, error, isLoading } = useCustomReactQuery<IProduct[]>("/api/products");
+  
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+    setError(error)
+    setProducts(data)
 
-  const loadProducts=()=>{
-
-  }
+  };
+  
 
   const loadUser=(
-    
   )=>{
+    useCustomReactQuery("http://localhost:5000/users/authenticate/")
 
   }
 
   const loadOrders=()=>{
-
+    useCustomReactQuery("http://localhost:5000/users/orders")
   }
 
   const loadFilteredProducts=()=>{
-    
+
   }
 
 

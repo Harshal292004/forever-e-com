@@ -2,10 +2,10 @@
 import  { Request, Response, NextFunction } from "express";
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
-import User from "../../models/userModel";
+import User from "../../../models/userModel";
 import generateToken from "../utils/generateToken";
-import Actor from "../../interfaces/IActor";
-import IAuthRequest from "../../interfaces/IAuthRequest";
+import Actor from "../../../interfaces/IActor";
+import IAuthRequest from "../../../interfaces/IAuthRequest";
 const signUpUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { name, email, password } = req.body;

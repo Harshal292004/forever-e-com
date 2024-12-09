@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import "dotenv/config"
-import Actor from '../../interfaces/IActor'
+import Actor from '../../../interfaces/IActor'
 
 
 const generateToken=(actor:Actor)=>{

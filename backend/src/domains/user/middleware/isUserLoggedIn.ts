@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import User from '../../models/userModel'
+import User from '../../../models/userModel'
 import { Request, Response, NextFunction } from 'express'
 
 const isUserLoggedIn = async (req: Request, res: Response, next: NextFunction):Promise<void> => {

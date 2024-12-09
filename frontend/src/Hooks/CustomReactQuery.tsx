@@ -1,31 +1,65 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 
-
-const useCustomReactQuery=<T,>()=>{
-    const [item,setItems]=useState([])
-    const [error,setError]=useState(false)
-    const [isLoading,setIsLoading]=useState(false)
-    useEffect(()=>{
-        (async()=>{
-            try{
-                setIsLoading(true)
-                setError(false)
-                const response=await axios.get('/api/product')
-                console.log(response.data);
-                setItems(response.data)
-                setIsLoading(false)
-                
-            }catch(error){
-                setError(true)
-                setIsLoading(false)
-            }
-        })()
-    },[])
-
-    return {item,error,isLoading}
-
+interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message: string;
 }
 
+interface UseQueryState<T> {
+  data: T | null;
+  error: string | null;
+  isLoading: boolean;
+}
 
-export default useCustomReactQuery
+const useCustomReactQuery = <T,>(
+  endpoint: string,
+  options?: AxiosRequestConfig
+) => {
+  const [state, setState] = useState<UseQueryState<T>>({
+    data: null,
+    error: null,
+    isLoading: false,
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    (async () => {
+      try {
+        setState({ data: null, error: null, isLoading: true });
+
+        const response = await axios.get<ApiResponse<T>>(endpoint, {
+          ...options,
+          signal: controller.signal,
+        });
+
+        if (response.data.success) {
+          setState({ data: response.data.data, error: null, isLoading: false });
+        } else {
+          setState({
+            data: null,
+            error: response.data.message,
+            isLoading: false,
+          });
+        }
+      } catch (err) {
+        if (axios.isCancel(err)) return;
+        setState({
+          data: null,
+          error: (err as Error).message || "An error occurred",
+          isLoading: false,
+        });
+      }
+    })();
+
+    return () => {
+      controller.abort();
+    };
+  }, [endpoint, options]);
+
+  return state;
+};
+
+export default useCustomReactQuery;
