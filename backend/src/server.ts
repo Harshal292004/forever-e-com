@@ -3,7 +3,7 @@ import express from "express"
 import path from "path"
 import cookieParser from "cookie-parser"
 import db from "./config/mongoose-connection"
-import errorHandler from "./shared/middleware/errorHandler"
+import errorHandler from "./core/middleware/errorHandler"
 import userServiceRouter from "./domains/user/routes/userServiceRoutes"
 import userAuthenticationRoutes from "./domains/user/routes/userAuthenticationRouter"
 
