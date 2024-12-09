@@ -2,12 +2,12 @@ import express, { NextFunction } from 'express';
 import mongoose from 'mongoose';
 const userServiceRouter = express.Router();
 import { Response,Request } from 'express';
-import Address from '../../../models/addressModel';
+import Address from '../../../models/user/addressModel';
 import User from '../../../models/userModel';
 import isUserLoggedIn from '../middleware/isUserLoggedIn';
 import verifyUserOwnership from '../middleware/verifyOwnerShip';
 import Order from '../../../models/orderModel'
-import Product from '../../../models/productModel';
+import Product from '../../../models/product/productModel';
 import Seller from '../../../models/sellerModel';
 import Review from '../../../models/reviewModel';
 userServiceRouter.post('/:id/add-address',isUserLoggedIn,verifyUserOwnership, async (req: Request, res: Response):Promise<any> => {
