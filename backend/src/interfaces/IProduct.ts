@@ -1,6 +1,5 @@
 import mongoose, { Document } from "mongoose";
-
-export default interface IProduct extends Document {
+interface IProductBase{
     name: string;                     // Product name
     description: string;              // Product description
     price: number;                    // Price
@@ -8,10 +7,19 @@ export default interface IProduct extends Document {
     category: string;                 // Primary category
     subCategory: string;              // Sub-category
     sizes: string[];                  // Available sizes
-    bestseller: boolean;              // Bestseller flag
-    sellerId: string;                 // New: Seller's ID
-    stock: number;                    // New: Available stock quantity
+    bestseller: boolean;              
+    storeId: mongoose.Types.ObjectId;                 
+    stock: number;                   
     reviews:mongoose.Types.ObjectId[]
+    policies: {
+        returnPolicy:string |  "No returns after 15 days" 
+        refundPolicy:string |  "Refund processed within 7 days" 
+        shippingPolicy:string | "Ships in 3-5 business days" 
+    };
     createdAt?: Date;
     updatedAt?: Date;
+}
+
+export default interface IProduct extends IProductBase, Document{
+    _id:mongoose.Types.ObjectId
 }

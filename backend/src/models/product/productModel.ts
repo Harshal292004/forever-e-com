@@ -26,16 +26,31 @@ const productSchema:Schema<IProduct>=new Schema(
             type:Boolean,
             default:false
         },
-        sellerId:{
-            type:String
+        storeId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Store"
         },
         stock:{
             type:Number
         },
         reviews:[{
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Review'
-        }]
+            ref:"Review"
+        }],
+        policies: {
+            returnPolicy:{
+                type:String ,
+                default:  "No returns after 15 days" 
+            },
+            refundPolicy:{
+                type:String,
+                default:"Refund processed within 7 days" 
+            },
+            shippingPolicy:{
+                type:String, 
+                default:"Ships in 3-5 business days" 
+            }
+        }
     },{timestamps:true}
 )
 

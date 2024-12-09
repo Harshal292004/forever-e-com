@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import IPaymentMethod from "../interfaces/IPaymentMethod";
+import IPaymentMethod from "../../interfaces/IPaymentMethod";
 
 
 const paymentMethodSchema:Schema<IPaymentMethod>= new Schema(
@@ -12,7 +12,11 @@ const paymentMethodSchema:Schema<IPaymentMethod>= new Schema(
             type:String
         },
         cardDetails:{
-            type:mongoose.Schema.Types.Mixed,
+            type:{
+                cardHolderName:String,
+                last4: String,
+                expiry: String      
+            },
             default:null
         },
         upiId:{

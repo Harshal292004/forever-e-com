@@ -2,11 +2,13 @@ import mongoose, { Schema } from "mongoose"
 import ISeller from "../../interfaces/ISeller"
 const sellerModelSchema:Schema<ISeller>=new Schema(
     {
-        firstName:{
-            type:String
-        },
-        lastName:{
-            type:String 
+        name:{
+            firstName:{
+                type:String
+            },
+            lastName:{
+                type:String 
+            }
         },
         email:{
             type:String 

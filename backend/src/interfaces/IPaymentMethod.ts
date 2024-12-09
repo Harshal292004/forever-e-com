@@ -1,6 +1,6 @@
-import { Document } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-export default interface IPaymentMethod  extends Document{
+interface IPaymentMethodBase{
     type: 'stripe' | 'razorpay' | 'cod'; // Payment type (gateway or COD)
     provider?: string;            // Optional: Provider name (e.g., "Stripe", "Razorpay")
     cardDetails?: {
@@ -10,4 +10,8 @@ export default interface IPaymentMethod  extends Document{
     };
     upiId?: string;               // UPI ID for Razorpay or similar services
     codConfirmation?: boolean;    // Optional: Confirmation of COD (e.g., user acknowledged)
+}
+
+export interface IPaymentMethod extends IPaymentMethodBase, Document{
+    _id:mongoose.Types.ObjectId
 }

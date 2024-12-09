@@ -7,7 +7,7 @@ interface IOrderBase  {
   size?: string;                    // Optional size                     // Timestamp of order placement
   totalPrice: number;               // Total price
   orderState:                       // Current status
-    | 'Placed'
+    'Placed'
     | 'Ready to Ship'
     | 'Shipped'
     | 'Reached Nearest Hub'
@@ -15,10 +15,10 @@ interface IOrderBase  {
     | 'Delivered'
     | 'Cancelled'
     | 'Returned';
-  shippingAddress: mongoose.Schema.Types.ObjectId         
+  shippingAddress: mongoose.Types.ObjectId;         
   paymentMethod: 'Stripe' | 'Razorpay' | 'COD'; 
-  trackingId?: string;              
-  sellerId: string;            
+  trackingId?: mongoose.Types.ObjectId;              
+  storeId?:mongoose.Types.ObjectId;          
   createdAt?: Date;
   updatedAt?: Date;
 }

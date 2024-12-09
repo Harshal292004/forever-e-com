@@ -31,8 +31,8 @@ const storeModelSchema= new Schema<IStore>(
             type:String
         },
         address:{
-           type:mongoose.Schema.Types.ObjectId,
-           ref:"Address"
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Address"
         },
         status:{
             type:String,
@@ -58,11 +58,18 @@ const storeModelSchema= new Schema<IStore>(
             type:Number
         },
         acceptedPaymentMethods:[
-         {
+        {
             type:mongoose.Schema.Types.ObjectId,
             ref:"PaymentMethod"
-         }
-        ]
+        }],
+        rating:{
+            type:Number,
+            default:0
+        },
+        reviews:[{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Review"
+        }]
     },{timestamps:true}
 )
 

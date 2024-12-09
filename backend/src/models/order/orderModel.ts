@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose"
-import IOrder from "../interfaces/IOrder"
-
+import IOrder from "../../interfaces/IOrder"
 
 const orderModelSchema:Schema<IOrder>=new Schema(
     {
@@ -23,21 +22,25 @@ const orderModelSchema:Schema<IOrder>=new Schema(
             type:Number
         },
         orderState:{
-            type:String
+            type:String,
+            enum:['Placed','Ready to Ship','Shipped','Reached Nearest Hub','Out for Delivery','Delivered','Cancelled','Returned']
         },
         shippingAddress:{
-            type:mongoose.Schema.Types.ObjectId,
+            type:mongoose.Types.ObjectId,
             ref:'Address'
         },
+        // this will depend on the product listed 
         paymentMethod:{
             type:String,
             default:"COD"
         },
         trackingId:{
-            type:String
+            type:mongoose.Types.ObjectId,
+            ref:"Tracking"
         },
-        sellerId:{
-            type:String 
+        storeId:{
+            type:mongoose.Types.ObjectId,
+            ref:"Store"
         }
     },{timestamps:true}
 )

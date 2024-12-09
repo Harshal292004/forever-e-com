@@ -1,7 +1,5 @@
-// IUser.ts
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-// First, let's create a base interface for user properties
 interface IUserBase {
     name: string;
     email: string;
@@ -17,7 +15,6 @@ interface IUserBase {
     updatedAt?: Date;
 }
 
-// Then extend it with Document to create the model interface
 export  default interface IUser extends IUserBase, Document {
     _id: mongoose.Types.ObjectId;
 }

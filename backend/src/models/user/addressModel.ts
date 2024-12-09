@@ -6,9 +6,6 @@ const addressModelSchema:Schema<IAddress>=new Schema(
         name:{
             type:String
         },
-        lastName:{
-            type:String
-        },
         email:{
             type:String
         },
@@ -21,7 +18,7 @@ const addressModelSchema:Schema<IAddress>=new Schema(
         state:{
             type:String
         },
-        zipcode:{
+        postalCode:{
             type:Number
         },
         country:{

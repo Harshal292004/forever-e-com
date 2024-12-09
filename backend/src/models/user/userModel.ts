@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import IUser from '../../interfaces/IUser';
 
 const userSchema = new Schema<IUser>(
@@ -20,28 +20,28 @@ const userSchema = new Schema<IUser>(
             type: String,
         },
         address: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Address',
         }],
         wishlist: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Product'
         }],
         cart: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'CartItem',
         }],
         orderHistory: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Order',
         }],
         paymentMethods: [{
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'PaymentMethod',
         }],
         review:[
             {
-                type:Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref:'Review'
             }
         ]

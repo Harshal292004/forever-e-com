@@ -3,24 +3,28 @@ import mongoose,{ Document } from "mongoose";
 interface IStoreBase{
     name:string;
     description?:string;
-    seller:mongoose.Schema.Types.ObjectId[];
+    seller:mongoose.Types.ObjectId[];
     logo?:string;
     GSTIN:string
     bannerImage?:string;
     contactEmail:string;
     phoneNumber?:string;
-    address?:mongoose.Schema.Types.ObjectId;
+    address?:mongoose.Types.ObjectId;
     status:'PENDING'|'APPROVED'|'REJECTED';
-    orderHistory:mongoose.Schema.Types.ObjectId[]
-    products:mongoose.Schema.Types.ObjectId[]
+    orderHistory:mongoose.Types.ObjectId[]
+    products:mongoose.Types.ObjectId[]
     createdAt?:Date;
     updatedAt?:Date
     platformCommissionRate?: number;
     totalProductsListed?: number;
     totalSales?: number;
-    acceptedPaymentMethods:mongoose.Schema.Types.ObjectId[]
+    acceptedPaymentMethods:mongoose.Types.ObjectId[]
+    rating:number;
+    reviews:mongoose.Types.ObjectId[]
+    
 }
 
+
 export default interface IStore extends Document , IStoreBase{
-    _id:mongoose.Schema.Types.ObjectId
+    _id:mongoose.Types.ObjectId
 }

@@ -1,4 +1,9 @@
 import mongoose, { Document } from "mongoose";
-export default interface ICartItem extends Document {
-    productId: mongoose.Schema.Types.ObjectId;             // Unique identifier for the product
+interface ICartItemBase{
+    productId: mongoose.Types.ObjectId;   
+    quantity:number
+}
+
+export default interface ICartItem extends ICartItemBase,Document{
+    _id:mongoose.Types.ObjectId
 }

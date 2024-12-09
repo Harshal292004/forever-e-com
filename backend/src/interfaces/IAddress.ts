@@ -1,12 +1,15 @@
-import { Document } from "mongoose";
-export default interface IAddress extends Document{
-    name?:string,
-    lastName?:string,
+import mongoose, { Document } from "mongoose";
+interface IAddressBase{
+    name:string,
     email?:string,
     street:string,
     city:string,
     state:string,
-    zipcode:number,
+    postalCode:number,
     country:string,
     phone:number
+}
+
+export default interface IAddress extends IAddressBase,Document{
+    _id:mongoose.Types.ObjectId
 }

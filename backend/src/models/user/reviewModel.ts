@@ -1,6 +1,5 @@
 import mongoose, {  Schema } from 'mongoose';
-import IReview from '../interfaces/IReview';
-
+import IReview from '../../interfaces/IReview';
 
 const reviewSchema: Schema<IReview> = new Schema(
   {
