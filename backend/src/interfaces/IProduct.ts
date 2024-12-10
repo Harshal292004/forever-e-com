@@ -18,6 +18,7 @@ interface IProductBase{
     };
     createdAt?: Date;
     updatedAt?: Date;
+    payment:boolean
 }
 
 export default interface IProduct extends IProductBase, Document{

@@ -50,6 +50,9 @@ const productSchema:Schema<IProduct>=new Schema(
                 type:String, 
                 default:"Ships in 3-5 business days" 
             }
+        },
+        payment:{
+            type:Boolean
         }
     },{timestamps:true}
 )

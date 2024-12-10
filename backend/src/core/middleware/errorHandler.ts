@@ -1,6 +1,5 @@
 import { NextFunction,Request,Response } from "express"
 import ErrorWithStatus from "../../interfaces/ErrorWithStatus"
-import requestLogger from "./requestLogger"
 import logger from "../utils/logger"
 const errorHandler=(err:ErrorWithStatus,req:Request,res:Response,next:NextFunction)=>{
     const status=err.status ||404

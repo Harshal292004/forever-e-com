@@ -4,8 +4,8 @@ import path from "path"
 import cookieParser from "cookie-parser"
 import db from "./config/mongoose-connection"
 import errorHandler from "./core/middleware/errorHandler"
-import userServiceRouter from "./domains/user/routes/userServiceRoutes"
-import userAuthenticationRoutes from "./domains/user/routes/userAuthenticationRouter"
+import userServiceRouter from "./domains/user/routes/userFunctionalityRoutes"
+import userAuthenticationRoutes from "./domains/user/routes/userAuthRoutes"
 import requestLogger  from "./core/middleware/requestLogger"
 const app= express()
 const port=process.env.PORT

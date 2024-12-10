@@ -1,13 +1,32 @@
-import { Router } from "express";
-import productAdminController from "../controllers/productAdminRouter";
-const router=Router()
+import { Router, Request, Response, NextFunction } from "express";
+import Product from "../../../models/product/productModel";
+import {
+  isSellerLoggedIn,
+  verifyStoreOwnerShip,
+  verifyAdminPrivilegeOfSeller,
+} from "../../store/middleware/sellerAuthMiddleware";
 
+const router = Router();
 
-router.put("/products/:id", (req, res) => {
-  res.send(`Product ID ${req.params.id} updated`);
-});
+router.post(
+  "/products/:sellerId/:storeId",
+  isSellerLoggedIn,
+  verifyStoreOwnerShip,
+  verifyAdminPrivilegeOfSeller,
+);
 
-router.delete("/products/:id", (req, res) => {
-  res.send(`Product ID ${req.params.id} deleted`);
-});
-  
+router.put(
+  "/products/:id",
+  isSellerLoggedIn,
+  verifyStoreOwnerShip,
+  verifyAdminPrivilegeOfSeller,
+);
+
+router.delete(
+  "/products/:id",
+  isSellerLoggedIn,
+  verifyStoreOwnerShip,
+  verifyAdminPrivilegeOfSeller,
+);
+
+export default router;
