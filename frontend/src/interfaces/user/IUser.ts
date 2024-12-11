@@ -1,22 +1,20 @@
-import Address from '../address/IAddress.ts';
-import Order from './IOrder.ts';
-import CartItem from './ICart.ts';
-import PaymentMethod from './IPaymentMethod.ts'
+import IAddress from '../address/IAddress.ts';
+import IOrder from './IOrder.ts';
+import ICart from './ICart.ts';
+import IPaymentMethod from './IPaymentMethod.ts'
 export default interface IUser {
-    id: string;                     // Unique identifier for the user
-    name: string;                   // Full name of the user
-    email: string;                  // Email address (for communication and authentication)
-    phoneNumber?: string; 
+    uId: string;                     
+    name: string;                   
+    email: string;                  
+    phone: string; 
     addressIds?:string[]          
-    address?: Address[]
+    address?: IAddress[]
     wishlist?: string[];           
     wishlistIds?:string[]
-    cart?: CartItem[];            
+    cart?: ICart[];            
     cartIds?:string[]
-    orderHistory?: Order[];         
+    orderHistory?: IOrder[];         
     orderIds?:string[]
-    paymentMethods?: PaymentMethod[]; // Saved payment methods
+    paymentMethods?: IPaymentMethod[]; 
     paymentMethodsIds?:string[]
-    createdAt: Date;                // Date when the user account was created
-    updatedAt?: Date;               // Last updated timestamp (optional)
 }

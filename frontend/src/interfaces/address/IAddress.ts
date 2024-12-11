@@ -1,6 +1,6 @@
 export default interface IAddress{
+    aId:string,
     name:string,
-    lastName:string,
     email:string,
     street:string,
     city:string,

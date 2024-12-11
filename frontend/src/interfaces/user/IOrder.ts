@@ -1,11 +1,11 @@
-import Address  from "../address/IAddress";
+import IAddress from "../address/IAddress";
 export default interface IOrder {
-  id: string;                       
+  oId: string;                       
   image: string;                    
   name: string;                     
   price: number;                    
   quantity: number;                 
-  size?: string;                    
+  size: string;                    
   totalPrice: number;               
   orderState:                       
     | 'Placed'
@@ -16,7 +16,7 @@ export default interface IOrder {
     | 'Delivered'
     | 'Cancelled'
     | 'Returned';
-  shippingAddress: Address;         
+  shippingAddress:IAddress, 
   paymentMethod: 'Stripe' | 'Razorpay' | 'COD';
-  storeId: string;                 
+  sId: string;                 
 }

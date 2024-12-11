@@ -1,5 +1,5 @@
 export default interface IProduct {
-    _id: string;                      // Product ID
+    pId: string;                      // Product ID
     name: string;                     // Product name
     description: string;              // Product description
     price: number;                    // Price
@@ -7,8 +7,12 @@ export default interface IProduct {
     category: string;                 // Primary category
     subCategory: string;              // Sub-category
     sizes: string[];                  // Available sizes
-    date: number;                     // Listing date (timestamp)
     bestseller: boolean;              // Bestseller flag
-    sellerId: string;                 // New: Seller's ID
+    sId: string;                 // New: Seller's ID
     stock: number;                    // New: Available stock quantity
+    policies:{
+        returnPolicy:string,
+        refundPolicy:string,
+        shippingPolicy:string
+    }
 }

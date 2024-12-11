@@ -1,10 +1,9 @@
 export default interface ICart{
-    productId: string;            
+    pId: string;            
     name: string;                 
-    imageUrl: string;             
+    image: string;             
     price: number;                
     quantity: number;             
     totalPrice: number;           
-    size:string;
-    sellerId:string 
+    size:string
 }
