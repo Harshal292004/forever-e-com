@@ -34,6 +34,10 @@ const orderModelSchema:Schema<IOrder>=new Schema(
             type:String,
             default:"COD"
         },
+        payment:{
+            type:Boolean,
+            default:false
+        },
         trackingId:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"Tracking"

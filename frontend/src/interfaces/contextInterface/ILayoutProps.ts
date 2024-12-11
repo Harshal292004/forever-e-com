@@ -1,7 +1,7 @@
 import React from "react";
 
-interface LayoutProps{
+interface ILayoutProps{
     children:React.ReactNode
 }
 
-export default LayoutProps
+export default ILayoutProps

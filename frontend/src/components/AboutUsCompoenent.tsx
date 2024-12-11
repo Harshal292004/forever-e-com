@@ -1,4 +1,3 @@
-import React from 'react';
 import { assets } from '../assets/assets';
 import Subscribe from './Subscribe';
 import CustomHeading from './CustomHeading';

@@ -1,8 +1,7 @@
-import React from 'react'
-import Heading from '../interfaces/Heading'
+import IHeading from '../interfaces/uiInterface/IHeading'
 
 
-const CustomHeading = (head:Heading) => {
+const CustomHeading = (head:IHeading) => {
   return (
     <div>
       <h1 className="text-3xl font-bold flex items-center gap-4">

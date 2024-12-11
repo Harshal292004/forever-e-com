@@ -1,7 +1,7 @@
 // Hero.tsx
 import React from 'react';
 import { assets, products } from '../assets/assets';
-import Product from '../interfaces/Product';
+import Product from '../interfaces/product/IProduct';
 import Card from './Card';
 
 const Hero = () => {

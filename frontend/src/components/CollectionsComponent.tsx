@@ -1,6 +1,6 @@
 import React from 'react';
 import { products } from '../assets/assets';
-import Product from '../interfaces/Product';
+import Product from '../interfaces/product/IProduct';
 import Card from './Card';
 import CustomHeading from './CustomHeading';
 const CollectionsComponent: React.FC = () => {

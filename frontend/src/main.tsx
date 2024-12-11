@@ -2,12 +2,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
-import ShopContextProvider from './context/ShopContext.tsx'
-
+import UserContextProvider from './context/UserContext.tsx'
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <ShopContextProvider>    
+    <UserContextProvider>    
       <App />
-    </ShopContextProvider>
+    </UserContextProvider>
   </BrowserRouter>
 )

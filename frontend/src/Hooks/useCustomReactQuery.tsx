@@ -13,11 +13,13 @@ interface UseQueryState<T> {
   isLoading: boolean;
 }
 
-const useCustomReactQuery = <T,>(
+
+const useCustomReactQuery = <T, U>(
   endpoint: string,
+  transformData: (backendData: T) => U,
   options?: AxiosRequestConfig
 ) => {
-  const [state, setState] = useState<UseQueryState<T>>({
+  const [state, setState] = useState<UseQueryState<U>>({
     data: null,
     error: null,
     isLoading: false,
@@ -36,7 +38,8 @@ const useCustomReactQuery = <T,>(
         });
 
         if (response.data.success) {
-          setState({ data: response.data.data, error: null, isLoading: false });
+          const transformedData = transformData(response.data.data);
+          setState({ data: transformedData, error: null, isLoading: false });
         } else {
           setState({
             data: null,
@@ -57,7 +60,7 @@ const useCustomReactQuery = <T,>(
     return () => {
       controller.abort();
     };
-  }, [endpoint, options]);
+  }, [endpoint, options, transformData]);
 
   return state;
 };

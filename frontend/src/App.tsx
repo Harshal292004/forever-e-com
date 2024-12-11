@@ -13,6 +13,7 @@ import PlaceOrder from './pages/PlaceOrder';
 import Product from './pages/Product';
 import './index.css'
 import Layout from './components/Layout';
+
 const App: React.FC = () => {
   return (
     <div className='poppins-light'>

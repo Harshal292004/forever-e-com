@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutProps from "../interfaces/LayoutProps";
+import LayoutProps from "../interfaces/contextInterface/ILayoutProps";
 import Navbar from "./NavBar";
 import Footer from "./Footer";
 

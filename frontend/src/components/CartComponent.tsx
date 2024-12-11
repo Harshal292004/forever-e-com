@@ -1,5 +1,5 @@
 import { assets } from '../assets/assets';
-import Product from '../interfaces/Product';
+import Product from '../interfaces/product/IProduct';
 const CartComponent = (props: Product) => {
   const{
     bin_icon

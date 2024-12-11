@@ -7,6 +7,9 @@ import generateToken from "../../../core/utils/tokenGenerator";
 import Actor from "../../../interfaces/IActor";
 import throwError from "../../../core/utils/errorThrower";
 class userAuthController{
+    //post
+    //=>userAuthController=>generates token=>error handler=>sends response => update frontend on success
+    //http://localhost:5000/users/signUpUser
     async signUpUser(req: Request, res: Response, next: NextFunction){
         try {
             const { name, email, password } = req.body;
@@ -43,6 +46,9 @@ class userAuthController{
         } 
     };
 
+    //post 
+    //=>userAuthController=>generates token=>error handler =>sends response =>update frontend on success
+    //http://localhost:5000/users/logInUser
     async logInUser(req: Request, res: Response, next: NextFunction){
         try {
             const { email, password } = req.body;
@@ -79,7 +85,9 @@ class userAuthController{
         } 
     };
 
-    async logOut(req:Request,res:Response,next:NextFunction){
+    //post 
+    //isUserLoggedIn=>verifyOwnerShip=>userAuthController=>session cleared => update frontend on success
+    logOutUser(req:Request,res:Response,next:NextFunction){
         try{
             res.clearCookie('user_access_token',{
                 httpOnly:true,
@@ -98,7 +106,8 @@ class userAuthController{
         }
     };
 
-    async deleteAccount(req: Request, res: Response,next:NextFunction){
+    //delete
+    async deleteUserAccount(req: Request, res: Response,next:NextFunction){
         try {
             // We already have the user from middleware
             const user = req.user;

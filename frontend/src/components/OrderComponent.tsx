@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Order from '../interfaces/Order';
+import Order from '../interfaces/user/IOrder';
 
 const OrderComponent: FC<Order> = ({ image, name, price, quantity, size, date }) => {
   const convertTimeStamp = (time: number): string => {

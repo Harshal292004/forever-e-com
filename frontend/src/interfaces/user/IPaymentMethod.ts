@@ -1,4 +1,4 @@
-export default interface PaymentMethod {
+export default interface IPaymentMethod {
     id: string;                   // Unique identifier for the payment method (e.g., "stripe", "razorpay", "cod")
     type: 'stripe' | 'razorpay' | 'cod'; // Payment type (gateway or COD)
     provider?: string;            // Optional: Provider name (e.g., "Stripe", "Razorpay")

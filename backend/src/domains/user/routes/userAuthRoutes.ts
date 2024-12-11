@@ -1,25 +1,24 @@
 // userRouter
 import express from "express";
-import isUserLoggedIn from "../middleware/isUserLoggedIn";
-import userController from "../controllers/userAuthController";
+import { isUserLoggedIn,verifyUserOwnership } from "../middleware/userAuthMiddleWare";
+import userAuthController from "../controllers/userAuthController";
+
 const userAuthenticationRoutes = express.Router();
+const authController=new userAuthController()
 
-userAuthenticationRoutes.post("/log-in", async (req, res, next) => {
-    await userController.logInUser(req, res, next);
-});
-
-userAuthenticationRoutes.post("/sign-up", async (req, res, next) => {
-    await userController.signUpUser(req, res, next);
-});
-
-userAuthenticationRoutes.post("/log-out",isUserLoggedIn,async (req,res)=>{
-    await userController.logOut(req,res)
-})
+//http://localhost:5000/users/signUpUser
+userAuthenticationRoutes.post("/signUpUser",async (req,res,next)=>{await authController.logInUser(req,res,next)});
 
 
-userAuthenticationRoutes.post("/delete-account",isUserLoggedIn,async (req,res)=>{
-    await userController.deleteAccount(req,res)
-})
+//http://localhost:5000/users/logInUser
+userAuthenticationRoutes.post("/logInUser",async (req, res, next) => {await authController.logInUser(req,res,next)});
+
+
+//http://localhost:/5000/users/:uId/logOutUser
+userAuthenticationRoutes.post("/logOutUser",isUserLoggedIn,(req,res,next)=>{ authController.logOutUser(req,res,next)})
+
+//http://localhost:/5000/users/:uId/deleteUserAccount
+userAuthenticationRoutes.delete("/deleteUserAccount",isUserLoggedIn,verifyUserOwnership,async (req,res,next)=>{await authController.deleteUserAccount(req,res,next)})
 
 
 export default userAuthenticationRoutes;

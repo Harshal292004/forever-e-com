@@ -1,5 +1,5 @@
 import React from 'react';
-import Product from '../interfaces/Product';
+import Product from '../interfaces/product/IProduct';
 
 const Card: React.FC<Product> = (props:Product) => {
   return (

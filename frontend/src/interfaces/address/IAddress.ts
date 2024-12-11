@@ -1,11 +1,11 @@
-export default interface Address{
+export default interface IAddress{
     name:string,
     lastName:string,
     email:string,
     street:string,
     city:string,
     state:string,
-    zipcode:number,
+    postalCode:number,
     country:string,
     phone:number
 }

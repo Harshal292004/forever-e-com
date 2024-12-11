@@ -17,6 +17,7 @@ interface IOrderBase  {
     | 'Returned';
   shippingAddress: mongoose.Schema.Types.ObjectId;         
   paymentMethod: 'Stripe' | 'Razorpay' | 'COD'; 
+  payment:boolean;
   trackingId?: mongoose.Schema.Types.ObjectId;              
   storeId?:mongoose.Schema.Types.ObjectId;          
   createdAt?: Date;

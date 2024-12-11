@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import OrderComponent from "../components/OrderComponent";
-import Order from "../interfaces/Order";
+import Order from "../interfaces/user/IOrder";
 
 const Orders: FC = () => {
   const orderArray: Order[] = [
