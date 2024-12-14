@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Order from '../interfaces/user/IOrder';
 
-const OrderComponent: FC<Order> = ({ image, name, price, quantity, size, date }) => {
+const OrderComponent: FC<Order> = ({ image, name, price, quantity, size }) => {
   const convertTimeStamp = (time: number): string => {
     const date = new Date(time);
     return date.toLocaleDateString();
@@ -19,7 +19,6 @@ const OrderComponent: FC<Order> = ({ image, name, price, quantity, size, date })
             <p>{quantity}</p>
             <p>{size}</p>
           </div>
-          <p>Date: {convertTimeStamp(date)}</p>
         </div>
       </div>
 

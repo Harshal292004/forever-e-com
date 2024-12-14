@@ -13,11 +13,13 @@ import PlaceOrder from './pages/PlaceOrder';
 import Product from './pages/Product';
 import './index.css'
 import Layout from './components/Layout';
-
+import StoreLayout from './components/store/StoreLayout';
+import StoreHome from './pages/Store/StoreHome';
 const App: React.FC = () => {
   return (
     <div className='poppins-light'>
       <ToastContainer />
+      {/*user routes*/}
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/about-us" element={<Layout><About /></Layout>} />
@@ -28,8 +30,15 @@ const App: React.FC = () => {
         <Route path="/orders" element={<Layout><Orders /></Layout>} />
         <Route path="/place-order" element={<Layout><PlaceOrder /></Layout>} />
         <Route path="/product" element={<Layout><Product /></Layout>} />
+
+
+        {/*Store Routes*/}
+        <Route path="/store" element={<StoreLayout><StoreHome></StoreHome></StoreLayout>}></Route>
+
         <Route path="*" element={<div>404 Page Not Found</div>} />
+
       </Routes>
+        
     </div>
   );
 };

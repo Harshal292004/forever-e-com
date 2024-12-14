@@ -14,7 +14,6 @@ const AboutUsComponent = () => {
       {/* Main Content Container */}
       <div className="container mx-auto px-6 py-16">
         {/* About Us Section */}
-        
         <CustomHeading
         {...head}
         >

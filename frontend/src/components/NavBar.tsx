@@ -4,14 +4,14 @@ import { UserContext } from '../context/UserContext';
 import { assets } from "../assets/assets";
 
 const Navbar = () => {
-  const { searchQuery, setSearchQuery } = useContext(UserContext); // Access context searchQuery and setSearchQuery
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false); // State to control search box visibility
+  const { searchQuery, setSearchQuery } = useContext(UserContext); 
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const navLinks = ["Home", "Collection", "About Us", "Contact us"];
   const { cart_icon, profile_icon, search_icon } = assets;
   const navigate = useNavigate();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value); // Update searchQuery in context
+    setSearchQuery(e.target.value); 
   };
 
   const handleSearchSubmit = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
           </div>
 
           {/* Main Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="flex items-center space-x-8">
             {navLinks.map((link, index) => (
               <NavLink
                 key={index}
@@ -49,16 +49,11 @@ const Navbar = () => {
           {/* Secondary Navigation / Actions */}
           <div className="flex items-center space-x-6">
             {/* Searchbox */}
-            <div className="relative">
-              <button
-                className="p-2 hover:bg-light-secondary/10 rounded-full transition-colors duration-200"
-                onClick={() => setIsSearchOpen((prev) => !prev)} // Toggle search box visibility
-              >
-                <img src={search_icon} alt="Search" className="h-5 w-5" />
-              </button>
+            <div className="relative flex flex-row gap-3 items-center">
+              
 
               {isSearchOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border">
+                <div className=" mt-2 w-48 bg-white  rounded-lg border">
                   <input
                     type="text"
                     value={searchQuery}
@@ -69,6 +64,12 @@ const Navbar = () => {
                   />
                 </div>
               )}
+              <button
+                className="p-2 hover:bg-light-secondary/10 rounded-full transition-colors duration-200"
+                onClick={() => setIsSearchOpen((prev) => !prev)} // Toggle search box visibility
+              >
+                <img src={search_icon} alt="Search" className="h-5 w-5" />
+              </button>
             </div>
 
             <div className="flex items-center space-x-4">

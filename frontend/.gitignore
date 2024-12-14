@@ -1,36 +1,48 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Dependency directories
+node_modules/
+npm_modules/
+bower_components/
+jspm_packages/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
 
-node_modules
-dist
-dist-ssr
+# Build output and compiled files
+dist/
+build/
+out/
 *.local
+*.log
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Environment and local configuration
+.env
 
-src/assets
-src/vite-env.d.ts
-eslint.config.js
-package.json 
+# Logs
+npm-debug.log*
+
+
+# Typescript and build tool specific
+*.tsbuildinfo
+*.tgz
+
+**/dist-ssr/
+**/vite-env.d.ts
+eslint.*
+index.html
+prettierrc*
 tsconfig.json
-package-lock.json 
-tsconfig.app.json
-tsconfig.node.json
 vite.config.ts
-tailwind.config.js 
-postcss.config.js 
+tailwind.config.js
+postcss.config.js
+tsconfig.*
+
+
+**/src/assets/**/*
+
+!**/src/components/**/*
+!**/src/pages/**/*
+!**/src/hooks/**/*
+!**/src/context/**/*
+!**/src/interfaces/**/*
+!**/src/transformation/**/*
+

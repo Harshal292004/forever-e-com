@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { UserContext } from '../context/UserContext';
 const Login: React.FC = () => {
     const [currState, setCurrState] = useState<"Sign Up" | "Login">("Sign Up");
     const [userName, setUserName] = useState<string>("");
@@ -10,8 +10,7 @@ const Login: React.FC = () => {
     const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false); 
 
-    const navigate = useNavigate();
-    
+    const []=useContext(UserContext)
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true); 
@@ -35,7 +34,7 @@ const Login: React.FC = () => {
 
         try {
             console.log(`Processing ${currState === "Sign Up" ? "Sign Up" : "Login"}...`);
-            /* if (currState === "Sign Up") {
+            if (currState === "Sign Up") {
                 const userId = await signUp(userName, email, password);
                 console.log(`UserId: ${userId}`)           
                 if (userId) {
@@ -49,7 +48,7 @@ const Login: React.FC = () => {
                     await loadUserData(userId);
                     navigate("/chat");
                 }
-            } */
+            }
         } catch (error) {
             console.error("Authentication error:", error);
             toast.error((error as Error).message || "Authentication failed");

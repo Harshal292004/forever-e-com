@@ -92,7 +92,7 @@ const UserContextProvider: React.FC<IUserContextProviderProps> = ({ children }) 
   };
 
   const removeFromCart = (productId: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.productId !== productId));
+    setCart((prevCart) => prevCart.filter((item) => item.pId !== productId));
   };
 
   const placeOrder = () => {

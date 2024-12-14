@@ -1,9 +1,8 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   // Company links matching the image
-  const companyLinks = ["Home", "About us", "Delivery", "Privacy policy"];
+  const companyLinks = ["Home", "Collection", "About Us", "Delivery", "Privacy policy"];
   
   return (
     <footer className="bg-light-background py-16">
@@ -45,8 +44,8 @@ const Footer = () => {
             <div className="flex flex-col space-y-6">
               <h3 className="text-xl font-semibold text-light-primary">GET IN TOUCH</h3>
               <div className="flex flex-col space-y-4">
-                <p className="text-light-secondary">+1-000-000-0000</p>
-                <p className="text-light-secondary">greatstackdev@gmail.com</p>
+                <p className="text-light-secondary"></p>
+                <p className="text-light-secondary"></p>
                 <NavLink 
                   to="/instagram" 
                   className="text-light-secondary hover:text-light-accent transition-colors duration-200"
@@ -61,7 +60,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-light-secondary/20">
           <p className="text-center text-light-secondary text-sm">
-            Copyright 2024@ greatstack.dev - All Right Reserved.
+            Copyright 2024@  - All Right Reserved.
           </p>
         </div>
       </div>
